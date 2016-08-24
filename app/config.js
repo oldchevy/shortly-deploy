@@ -37,4 +37,7 @@ db.knex.schema.hasTable('users').then(function(exists) {
   }
 });
 
+
+//Some comment we want to find on the server!
+//Let's see.....
 module.exports = db;
