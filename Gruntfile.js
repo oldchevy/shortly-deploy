@@ -114,8 +114,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('test', [
-    // 'mochaTest',
-    'eslint'
+    'mochaTest'
   ]);
 
   grunt.registerTask('build', [
@@ -139,6 +138,7 @@ module.exports = function(grunt) {
     //css minify, (only public assets)
     //concat public assets
     'test',
+    'eslint',
     'build',
     'upload'
   ]);
