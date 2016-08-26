@@ -18,7 +18,8 @@ module.exports = function(grunt) {
     concurrent: {
       dev: [
         'nodemon',
-        'watch'
+        'watch',
+        'shell:startMongo'
       ],
       options: {
         logConcurrentOutput: true
@@ -88,6 +89,9 @@ module.exports = function(grunt) {
     shell: {
       prodServer: {
         command: 'git push live4 master'
+      },
+      startMongo: {
+        command: 'mongod --db-path=./db'
       }
     },
   });
@@ -123,7 +127,7 @@ module.exports = function(grunt) {
     'cssmin'
   ]);
 
-  grunt.registerTask('upload', function(n) {
+  grunt.registerTask('upload', function() {
     if (grunt.option('prod')) {
       grunt.task.run([ 'shell:prodServer' ]);
     } else {

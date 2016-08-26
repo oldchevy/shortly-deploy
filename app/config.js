@@ -51,7 +51,7 @@ var db2 = mongoose.connection;
 db2.on('error', console.error.bind(console, 'connection error:'));
 db2.once('open', console.log.bind(console, ('Weve connected to our DB!!')));
 
-var linkSchema = mongoose.Schema({
+var linkSchema = new mongoose.Schema({
   id: {type: Number,
        index: true},
   url: String,
@@ -65,7 +65,7 @@ var linkSchema = mongoose.Schema({
   }
 });
 
-var userSchema = mongoose.Schema({
+var userSchema = new mongoose.Schema({
   id: {type: Number,
        index: true },
   username: String,

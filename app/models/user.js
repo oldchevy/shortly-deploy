@@ -3,6 +3,8 @@ var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
 var mongoose = require('mongoose');
 
+db.userSchema.plugin(require('mongoose-lifecycle'));
+
 // var UserBook = db.Model.extend({
 //   tableName: 'users',
 //   hasTimestamps: true,
