@@ -26,18 +26,27 @@ db.userSchema.plugin(require('mongoose-lifecycle'));
 // });
 
 db.userSchema.methods.comparePassword = function (password, cb) {
-  console.log(this.password);
-  cb(this.password === password);
+  console.log(this.password, password);
+  bcrypt.compare(password, this.get('password'), function(err, isMatch) {
+    cb(isMatch);
+  });
 };
 
-db.linkSchema.pre('save', function(next) {
+db.userSchema.pre('save', function(next) {
 
-  var cipher = Promise.promisify(bcrypt.hash);
-  return cipher(this.get('password'), null, null).bind(this)
-    .then(function(hash) {
-      this.set('password', hash);
-      next();
-    });
+  //var cipher = Promise.promisify(bcrypt.hash);
+  console.log(this);
+
+  bcrypt.hash(this.get('password'), null, null, function(err, hash) {
+    console.log('Hashing: ', err, hash);
+    this.set('password', hash);
+    next();
+  }.bind(this));
+  // return cipher(this.get('password'), null, null).bind(this)
+  //   .then(function(hash) {
+  //     this.set('password', hash);
+  //     next();
+  //   });
 });
 
 var UserMon = mongoose.model('User', db.userSchema);

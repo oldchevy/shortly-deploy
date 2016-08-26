@@ -58,7 +58,9 @@ var linkSchema = new mongoose.Schema({
   baseUrl: String,
   code: String,
   title: String,
-  visits: Number,
+  visits: { type: Number,
+            default: 0 
+          },
   timestamps: {
     type: Date,
     default: Date.now
