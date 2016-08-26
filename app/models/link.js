@@ -20,7 +20,7 @@ db.linkSchema.plugin(require('mongoose-lifecycle'));
 
 db.linkSchema.pre('save', function(next) {
 
-  console.log('We are in the beforeSave event');
+  console.log('We are in the beforeSave event', this);
   var shasum = crypto.createHash('sha1');
   shasum.update(this.get('url'));
   this.set('code', shasum.digest('hex').slice(0, 5));

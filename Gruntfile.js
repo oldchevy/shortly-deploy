@@ -90,7 +90,7 @@ module.exports = function(grunt) {
         command: 'git push live4 master'
       },
       startMongo: {
-        command: 'mongod --db-path=./db'
+        command: 'mongod --dbpath=./db'
       }
     },
   });
