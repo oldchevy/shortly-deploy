@@ -18,8 +18,7 @@ module.exports = function(grunt) {
     concurrent: {
       dev: [
         'nodemon',
-        'watch',
-        'shell:startMongo'
+        'watch'
       ],
       options: {
         logConcurrentOutput: true
@@ -125,6 +124,10 @@ module.exports = function(grunt) {
     'concat',
     'uglify',
     'cssmin'
+  ]);
+
+  grunt.registerTask('mongo', [
+    'shell:startMongo'
   ]);
 
   grunt.registerTask('upload', function() {

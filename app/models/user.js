@@ -16,19 +16,29 @@ db.userSchema.plugin(require('mongoose-lifecycle'));
 //       callback(isMatch);
 //     });
 //   },
-//   hashPassword: function() {
-//     var cipher = Promise.promisify(bcrypt.hash);
-//     return cipher(this.get('password'), null, null).bind(this)
-//       .then(function(hash) {
-//         this.set('password', hash);
-//       });
-//   }
+  // hashPassword: function() {
+  //   var cipher = Promise.promisify(bcrypt.hash);
+  //   return cipher(this.get('password'), null, null).bind(this)
+  //     .then(function(hash) {
+  //       this.set('password', hash);
+  //     });
+  // }
 // });
 
 db.userSchema.methods.comparePassword = function (password, cb) {
   console.log(this.password);
   cb(this.password === password);
 };
+
+db.linkSchema.pre('save', function(next) {
+
+  var cipher = Promise.promisify(bcrypt.hash);
+  return cipher(this.get('password'), null, null).bind(this)
+    .then(function(hash) {
+      this.set('password', hash);
+      next();
+    });
+});
 
 var UserMon = mongoose.model('User', db.userSchema);
 

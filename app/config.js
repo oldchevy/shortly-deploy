@@ -46,7 +46,7 @@ db.knex.schema.hasTable('users').then(function(exists) {
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017');
+mongoose.connect('mongodb://45.55.29.112:27017');
 var db2 = mongoose.connection;
 db2.on('error', console.error.bind(console, 'connection error:'));
 db2.once('open', console.log.bind(console, ('Weve connected to our DB!!')));
